@@ -11,8 +11,10 @@ RUN go env -w GO111MODULE=auto
 RUN env $(cat .env | xargs) go build -o /docker-ipv6nat.$(echo "$TARGETPLATFORM" | sed -E 's/(^linux|\/)//g') ./cmd/docker-ipv6nat
 
 FROM alpine:3.17 AS release
-RUN apk add --no-cache ip6tables
-COPY --from=build /docker-ipv6nat.* /docker-ipv6nat
-COPY docker-ipv6nat-compat /
-ENTRYPOINT ["/docker-ipv6nat-compat"]
+RUN set -x \
+    && apk add --no-cache ip6tables \
+    && mkdir /docker-entrypoint.d
+COPY --from=build /docker-ipv6nat.* /docker-entrypoint.d/docker-ipv6nat
+COPY docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["--retry"]

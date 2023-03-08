@@ -14,4 +14,4 @@ ln -nfs "${BINARY}" /sbin/ip6tables-save
 ln -nfs "${BINARY}" /sbin/ip6tables-restore
 hash -r
 
-exec /docker-ipv6nat "${@}"
+exec /docker-entrypoint.d/docker-ipv6nat "${@}"
