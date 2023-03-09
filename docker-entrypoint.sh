@@ -18,4 +18,8 @@ ln -nfs "${BINARY}" /sbin/ip6tables-save
 ln -nfs "${BINARY}" /sbin/ip6tables-restore
 hash -r
 
-exec /docker-entrypoint.d/docker-ipv6nat "${@}"
+if [ "$1" = "docker-ipv6nat" ]; then
+    exec /docker-entrypoint.d/docker-ipv6nat "--retry"
+fi
+
+exec "$@"

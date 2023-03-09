@@ -20,4 +20,4 @@ RUN set -x \
 COPY --from=build /docker-ipv6nat.* /docker-entrypoint.d/docker-ipv6nat
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["--retry"]
+CMD ["docker-ipv6nat", "--retry"]
