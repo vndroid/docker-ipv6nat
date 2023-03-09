@@ -1,9 +1,13 @@
 #!/bin/sh
+# vim:sw=4:ts=4:et
+
+set -e
 
 BINARY="xtables-legacy-multi"
+
 if iptables-nft -L 2> /dev/null | grep -q "Chain DOCKER "
 then
-  BINARY="xtables-nft-multi"
+    BINARY="xtables-nft-multi"
 fi
 
 ln -nfs "${BINARY}" /sbin/iptables
