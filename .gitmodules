@@ -10,3 +10,6 @@
 [submodule "vendor/github.com/coreos/go-iptables"]
 	path = vendor/github.com/coreos/go-iptables
 	url = https://github.com/coreos/go-iptables
+[submodule "vendor/github.com/moby/patternmatcher"]
+	path = vendor/github.com/moby/patternmatcher
+	url = https://github.com/moby/patternmatcher
