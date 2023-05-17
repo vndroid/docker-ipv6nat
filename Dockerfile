@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM golang:1.19.7-alpine3.17 AS build
+FROM --platform=$BUILDPLATFORM golang:1.20.4-alpine3.18 AS build
 ARG TARGETPLATFORM
 WORKDIR /go/src/github.com/robbertkl/docker-ipv6nat
 COPY . .
@@ -13,7 +13,7 @@ RUN go env -w GO111MODULE=auto
 RUN env $(cat .env | xargs) go build -o /docker-ipv6nat.$(echo "$TARGETPLATFORM" | sed -E 's/(^linux|\/)//g') ./cmd/docker-ipv6nat
 RUN strip /docker-ipv6nat.*
 
-FROM alpine:3.17 AS release
+FROM alpine:3.18 AS release
 RUN set -x \
     && apk add --no-cache ip6tables \
     && mkdir /docker-entrypoint.d
