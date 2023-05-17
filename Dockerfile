@@ -12,7 +12,7 @@ RUN set -eux \
     && mkdir /output
 RUN go env -w GO111MODULE=on
 RUN env $(cat .env | xargs) go build -o /output/docker-ipv6nat.$(echo "$TARGETPLATFORM" | sed -E 's/(^linux|\/)//g') ./build/docker-ipv6nat
-RUN strip /docker-ipv6nat.*
+RUN strip /output/docker-ipv6nat.*
 
 FROM alpine:3.18 AS release
 RUN set -eux \
