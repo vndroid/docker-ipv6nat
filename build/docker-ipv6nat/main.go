@@ -5,12 +5,11 @@ import (
 	"fmt"
 	"log"
 	"os"
-
 	"github.com/fsouza/go-dockerclient"
-	"github.com/robbertkl/docker-ipv6nat"
+	"github.com/vndroid/docker-ipv6nat"
 )
 
-const buildVersion = "0.4.4"
+const buildVersion = "0.4.5"
 
 var (
 	cleanup       bool
@@ -21,7 +20,7 @@ var (
 )
 
 func usage() {
-	fmt.Fprintln(os.Stderr, `Usage: docker-ipv6 [options]
+	fmt.Fprintln(os.Stderr, `Usage: netd-v6nat [options]
 
 Automatically configure IPv6 NAT for running docker containers
 
@@ -68,7 +67,7 @@ func main() {
 
 func run() error {
 	if debug {
-		log.Println("docker-ipv6nat is running in debug mode")
+		log.Println("netd-v6nat is running in debug mode")
 	}
 
 	client, err := docker.NewClientFromEnv()
