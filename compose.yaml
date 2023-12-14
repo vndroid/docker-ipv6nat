@@ -1,0 +1,19 @@
+services:
+  ipv6nat:
+    image: ipv6nat:alpine
+    build:
+      context: build/ipv6nat/
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /lib/modules:/lib/modules:ro
+networks:
+  vNet:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      driver: default
+      config:
+        - subnet: fd00:cafe:face::/48
